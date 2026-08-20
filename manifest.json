@@ -1,0 +1,16 @@
+{
+  "name": "STARK OS - J.A.R.V.I.S. Mobile Edition",
+  "short_name": "STARK OS",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030a14",
+  "theme_color": "#030a14",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/color/512/iron-man.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

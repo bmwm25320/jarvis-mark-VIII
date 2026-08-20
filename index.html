@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="STARK OS">
+  <meta name="theme-color" content="#030a14">
+  <link rel="manifest" href="manifest.json">
+  <title>JARVIS - Stark Mobile OS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- JARVIS BOOT SEQUENCE OVERLAY -->
+  <div id="jarvisBootLoader" class="jarvis-boot-overlay">
+    <div class="boot-content">
+      <div class="boot-reactor">
+        <div class="boot-ring outer"></div>
+        <div class="boot-ring inner"></div>
+        <div class="boot-core"></div>
+      </div>
+      <div class="boot-title">J.A.R.V.I.S. SYSTEM</div>
+      <div class="boot-subtitle">MARK VII // INITIALIZATION SEQUENCE</div>
+      <div class="boot-progress-container">
+        <div class="boot-progress-bar" id="bootProgressFill"></div>
+      </div>
+      <div class="boot-log-box" id="bootLogBox">
+        <div>[SYSTEM] Initiating core processors...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FACE RECOGNITION LOCK SCREEN -->
+  <div id="faceLockOverlay" class="face-lock-overlay" style="display:none;">
+    <div class="face-lock-title">J.A.R.V.I.S. BIOMETRIC SCAN</div>
+    <div class="face-lock-subtitle">Clearance Level 10 // Identity Verification Required</div>
+    
+    <div class="face-scan-container">
+      <video id="faceCamFeed" autoplay muted playsinline></video>
+      <div class="face-scan-ring"></div>
+      <div class="face-scan-ring inner"></div>
+      <div class="face-scan-line"></div>
+    </div>
+    
+    <div id="faceLockStatus" class="face-lock-status">Initializing biometric scanner...</div>
+    <div id="faceRegisteredBadge" style="font-size:11px; color:rgba(0,240,255,0.6); font-family:'Orbitron',sans-serif; text-transform:uppercase; letter-spacing:1px;"></div>
+    
+    <div class="face-lock-pin-section" id="pinBypassSection" style="display:none;">
+      <input type="password" id="pinBypassInput" class="face-lock-pin-input" maxlength="6" placeholder="••••">
+      <button onclick="verifyPinBypass()" class="face-lock-bypass-btn"><i class="fa-solid fa-key"></i> VERIFY PIN</button>
+    </div>
+    
+    <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:10px;">
+      <button onclick="registerOwnerFace()" class="face-lock-bypass-btn" style="border-color:rgba(0,240,255,0.4); color:#00f0ff;"><i class="fa-solid fa-user-shield"></i> REGISTER MY FACE (SUMIT)</button>
+      <button onclick="showPinBypass()" class="face-lock-bypass-btn"><i class="fa-solid fa-fingerprint"></i> BYPASS WITH PIN CODE</button>
+    </div>
+  </div>
+
+  <!-- ULTRON EMERGENCY DEFENSE LOCKDOWN OVERLAY -->
+  <div id="ultronLockdownOverlay" class="face-lock-overlay" style="display:none; background:radial-gradient(circle, rgba(120, 0, 20, 0.95) 0%, rgba(10, 0, 5, 0.98) 100%); border:4px solid #ff2a5f; z-index:999999;">
+    <div class="face-lock-title" style="color:#ff2a5f; text-shadow:0 0 20px #ff2a5f;"><i class="fa-solid fa-shield-cat"></i> ULTRON COUNTERMEASURE DEFENSE MATRIX</div>
+    <div class="face-lock-subtitle" style="color:#ffb700;">🚨 WARNING: Emergency Lockdown Active // Systems Isolated by Mr. Sumit</div>
+    
+    <div class="face-scan-container" style="border-color:#ff2a5f; box-shadow:0 0 30px #ff2a5f;">
+      <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:48px; color:#ff2a5f; animation:pulse 1s infinite;"><i class="fa-solid fa-shield-halved"></i></div>
+      <div class="face-scan-ring" style="border-color:#ff2a5f;"></div>
+      <div class="face-scan-ring inner" style="border-color:#ffb700;"></div>
+    </div>
+    
+    <div id="ultronLockdownStatus" class="face-lock-status error" style="font-size:18px; font-weight:bold; margin-top:16px;">VIBRANIUM SHIELD ONLINE — ENTER PIN TO DISARM</div>
+    
+    <div class="face-lock-pin-section" style="display:flex; margin-top:12px;">
+      <input type="password" id="ultronPinInput" class="face-lock-pin-input" maxlength="6" placeholder="••••" style="border-color:#ff2a5f; color:#ff2a5f;">
+      <button onclick="disarmUltronLockdown()" class="face-lock-bypass-btn" style="border-color:#ff2a5f; color:#ff2a5f; background:rgba(255,42,95,0.2);"><i class="fa-solid fa-lock-open"></i> DISARM SHIELD</button>
+    </div>
+  </div>
+
+  <!-- HOLOGRAPHIC STARK TARGET LOCK-ON HUD RETICLE -->
+  <div id="starkFaceTargetReticle" style="display:none; position:fixed; top:75px; right:25px; z-index:99999; background:rgba(3, 10, 20, 0.88); border:2px solid #00f0ff; border-radius:12px; padding:14px 18px; box-shadow:0 0 30px rgba(0, 240, 255, 0.4); backdrop-filter:blur(10px); width:310px; font-family:'Orbitron', sans-serif; transition:all 0.4s ease;">
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0, 240, 255, 0.3); padding-bottom:8px; margin-bottom:10px;">
+      <span style="color:#00f0ff; font-size:11px; font-weight:bold; letter-spacing:1.5px; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-crosshairs fa-spin" style="color:#ff2a5f;"></i> STARK TARGET LOCK</span>
+      <span id="starkTargetThreatBadge" style="background:rgba(0, 255, 170, 0.2); color:#00ffaa; border:1px solid #00ffaa; font-size:9px; padding:2px 8px; border-radius:4px; font-weight:bold;">CLEARANCE: GRANTED</span>
+    </div>
+    
+    <div style="display:flex; gap:14px; align-items:center;">
+      <div style="position:relative; width:65px; height:65px; border-radius:50%; overflow:hidden; border:2px solid #00f0ff; box-shadow:0 0 15px rgba(0,240,255,0.5); flex-shrink:0;">
+        <img id="starkTargetAvatar" src="" style="width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; inset:0; border:2px dashed #ff2a5f; border-radius:50%; animation:spin 4s linear infinite;"></div>
+      </div>
+      
+      <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
+        <div id="starkTargetName" style="color:#ffffff; font-size:15px; font-weight:bold; text-shadow:0 0 8px #00f0ff;">UNKNOWN ENTITY</div>
+        <div id="starkTargetRelation" style="color:#00f0ff; font-size:11px;">RELATION: GUEST</div>
+        <div id="starkTargetBiometrics" style="color:rgba(255,255,255,0.6); font-size:9px; font-family:monospace;">PUPIL DIST: 64mm // EMOTION: CALM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STARK MATRIX HACKER TERMINAL OVERLAY -->
+  <div id="starkHackerTerminal" style="display:none; position:fixed; inset:0; z-index:999999; background:rgba(3, 8, 12, 0.96); backdrop-filter:blur(15px); border:3px solid #00ffaa; font-family:Consolas, monospace; color:#00ffaa; padding:20px; flex-direction:column; gap:14px; box-shadow:0 0 50px rgba(0,255,170,0.3);">
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #00ffaa; padding-bottom:10px;">
+      <span style="font-family:'Orbitron', sans-serif; font-size:16px; font-weight:bold; letter-spacing:2px; color:#00ffaa; display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-terminal fa-beat" style="color:#00ffaa;"></i> STARK CYBER PENETRATION & DIAGNOSTICS TERMINAL [ROOT]</span>
+      <button onclick="toggleHackerTerminal()" style="background:rgba(255,42,95,0.2); border:1px solid #ff2a5f; color:#ff2a5f; padding:6px 14px; border-radius:4px; cursor:pointer; font-family:'Orbitron', sans-serif; font-weight:bold;"><i class="fa-solid fa-xmark"></i> CLOSE TERMINAL</button>
+    </div>
+    
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <button onclick="runPortScan()" style="background:rgba(0,255,170,0.15); border:1px solid #00ffaa; color:#00ffaa; padding:8px 16px; border-radius:4px; cursor:pointer; font-weight:bold; font-family:inherit;"><i class="fa-solid fa-network-wired"></i> SCAN LOCAL PORTS</button>
+      <button onclick="promptIPTrace()" style="background:rgba(0,240,255,0.15); border:1px solid #00f0ff; color:#00f0ff; padding:8px 16px; border-radius:4px; cursor:pointer; font-weight:bold; font-family:inherit;"><i class="fa-solid fa-globe"></i> TRACE IP / DOMAIN</button>
+      <button onclick="generateQuantumPass()" style="background:rgba(255,183,0,0.15); border:1px solid #ffb700; color:#ffb700; padding:8px 16px; border-radius:4px; cursor:pointer; font-weight:bold; font-family:inherit;"><i class="fa-solid fa-key"></i> GENERATE QUANTUM PASS</button>
+      <button onclick="simulateCyberAttack()" style="background:rgba(255,42,95,0.15); border:1px solid #ff2a5f; color:#ff2a5f; padding:8px 16px; border-radius:4px; cursor:pointer; font-weight:bold; font-family:inherit;"><i class="fa-solid fa-shield-cat"></i> SIMULATE ATTACK</button>
+    </div>
+    
+    <div id="hackerTerminalLog" style="flex:1; background:rgba(0,10,5,0.9); border:1px solid rgba(0,255,170,0.4); border-radius:6px; padding:14px; overflow-y:auto; font-size:13px; line-height:1.6; text-shadow:0 0 5px #00ffaa;">
+      <div>[STARK OS CYBER SUITE INITIALIZED]...</div>
+      <div>Type 'scan', 'trace', or 'attack' into voice commands or click controls above.</div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE PHONE CONNECT MODAL -->
+  <div id="starkPhoneConnectModal" style="display:none; position:fixed; inset:0; z-index:9999999; background:rgba(3, 8, 15, 0.95); backdrop-filter:blur(15px); font-family:'Orbitron', sans-serif; color:#00f0ff; padding:20px; align-items:center; justify-content:center;">
+    <div style="background:rgba(3, 10, 20, 0.98); border:2px solid #00f0ff; border-radius:12px; width:100%; max-width:480px; padding:24px; box-shadow:0 0 40px rgba(0,240,255,0.4);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,240,255,0.3); padding-bottom:12px; margin-bottom:18px;">
+        <span style="font-size:15px; font-weight:bold; letter-spacing:1px; color:#00f0ff; display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-mobile-screen-button"></i> CONNECT PHONE VIA WI-FI</span>
+        <button onclick="closePhoneConnectModal()" style="background:rgba(255,42,95,0.2); border:1px solid #ff2a5f; color:#ff2a5f; padding:4px 10px; border-radius:4px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <p style="font-family:sans-serif; font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:16px; line-height:1.5;">
+        Type your Samsung/Android phone's IP address below (found under <i>Settings → Developer Options → Wireless Debugging</i>):
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px;">
+        <label style="font-size:11px; color:#ffb700;">PHONE IP ADDRESS & PORT:</label>
+        <input type="text" id="modalPhoneIpInput" value="192.168.1.6:42391" style="width:100%; padding:14px; background:rgba(0,0,0,0.8); border:2px solid #00f0ff; color:#00ffaa; font-family:monospace; font-size:18px; font-weight:bold; border-radius:6px; outline:none; box-shadow:0 0 15px rgba(0,255,170,0.3);">
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <span style="font-size:10px; color:rgba(255,255,255,0.5); display:block; margin-bottom:6px;">QUICK PRESETS (CLICK TO AUTO-FILL):</span>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="proto-chip" onclick="document.getElementById('modalPhoneIpInput').value='192.168.1.6:42391'">192.168.1.6:42391</button>
+          <button class="proto-chip" onclick="document.getElementById('modalPhoneIpInput').value='192.168.1.6:5555'">192.168.1.6:5555</button>
+          <button class="proto-chip" onclick="document.getElementById('modalPhoneIpInput').value='192.168.1.15:5555'">192.168.1.15:5555</button>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; justify-content:flex-end;">
+        <button onclick="closePhoneConnectModal()" style="background:transparent; border:1px solid rgba(255,255,255,0.3); color:white; padding:10px 18px; border-radius:6px; cursor:pointer;">CANCEL</button>
+        <button onclick="submitModalPhoneConnect()" style="background:rgba(0,240,255,0.2); border:2px solid #00f0ff; color:#00f0ff; font-weight:bold; padding:10px 24px; border-radius:6px; cursor:pointer; box-shadow:0 0 15px rgba(0,240,255,0.4);"><i class="fa-solid fa-link"></i> CONNECT NOW</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE API KEY MANAGER MODAL -->
+  <div id="starkApiKeyModal" style="display:none; position:fixed; inset:0; z-index:9999999; background:rgba(3, 8, 15, 0.95); backdrop-filter:blur(15px); font-family:'Orbitron', sans-serif; color:#00f0ff; padding:20px; align-items:center; justify-content:center;">
+    <div style="background:rgba(3, 10, 20, 0.98); border:2px solid #ffb700; border-radius:12px; width:100%; max-width:500px; padding:24px; box-shadow:0 0 40px rgba(255,183,0,0.4);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,183,0,0.3); padding-bottom:12px; margin-bottom:18px;">
+        <span style="font-size:16px; font-weight:bold; letter-spacing:1px; color:#ffb700; display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-key"></i> STARK CLOUD AI API KEY MANAGER</span>
+        <button onclick="closeApiKeyModal()" style="background:rgba(255,42,95,0.2); border:1px solid #ff2a5f; color:#ff2a5f; padding:4px 10px; border-radius:4px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <p style="font-family:sans-serif; font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:16px; line-height:1.5;">
+        Paste your Google Gemini API Key below. When internet is online, J.A.R.V.I.S. uses your Cloud API key for ultra-fast intelligence. When offline, J.A.R.V.I.S. automatically falls back to Local LLM (Ollama).
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px;">
+        <label style="font-size:11px; color:#00f0ff;">GOOGLE GEMINI API KEY:</label>
+        <input type="password" id="modalApiKeyInput" placeholder="Paste your API key here (AIzaSy...)" style="width:100%; padding:14px; background:rgba(0,0,0,0.8); border:2px solid #ffb700; color:#ffb700; font-family:monospace; font-size:15px; border-radius:6px; outline:none; box-shadow:0 0 15px rgba(255,183,0,0.2);">
+      </div>
+
+      <div style="display:flex; gap:12px; justify-content:flex-end;">
+        <button onclick="closeApiKeyModal()" style="background:transparent; border:1px solid rgba(255,255,255,0.3); color:white; padding:10px 18px; border-radius:6px; cursor:pointer;">CANCEL</button>
+        <button onclick="submitModalApiKey()" style="background:rgba(255,183,0,0.2); border:2px solid #ffb700; color:#ffb700; font-weight:bold; padding:10px 24px; border-radius:6px; cursor:pointer; box-shadow:0 0 15px rgba(255,183,0,0.4);"><i class="fa-solid fa-floppy-disk"></i> SAVE API KEY</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEALTH MODE INDICATOR -->
+  <div class="stealth-indicator" id="stealthIndicator"></div>
+
+  <div class="hud-container">
+    <div class="cyber-grid"></div>
+
+    <header class="hud-titlebar">
+      <div class="titlebar-brand">
+        <div class="arc-mini-logo"></div>
+        <span class="protocol-badge" id="currentProtocolLabel">PROTOCOL: DEFENSE</span>
+        <span class="protocol-badge" id="aiEngineStatusBadge" style="border-color:rgba(0,240,255,0.4); color:#00f0ff;"><i class="fa-solid fa-robot"></i> CHECKING AI ENGINE...</span>
+      </div>
+
+      <div class="hud-center-telemetry">
+        <div class="tele-item"><i class="fa-solid fa-microchip text-cyan"></i> CPU <span id="cpuUsageVal">14%</span></div>
+        <div class="tele-item" style="cursor:pointer;" onclick="purgeSystemRam()" title="Click to Purge System RAM & Reclaim Memory"><i class="fa-solid fa-broom text-gold"></i> RAM <span id="ramUsageVal">85 MB</span></div>
+        <div class="tele-item" id="hudFaceRadarBadge" style="cursor:pointer;" onclick="openFaceMemoryManager()"><i class="fa-solid fa-eye text-cyan"></i> RADAR <span id="hudFaceRadarText" class="text-cyan">ACTIVE</span></div>
+        <div class="tele-item" id="hudCyberShieldBadge" style="cursor:pointer;" title="Stark Cyber Shield Active"><i class="fa-solid fa-shield-halved text-emerald"></i> SHIELD <span id="hudCyberShieldText" class="text-emerald">SECURE</span></div>
+        <div class="tele-item"><i class="fa-solid fa-wifi text-emerald"></i> NET <span class="text-emerald">ONLINE</span></div>
+        <div class="tele-item"><i class="fa-solid fa-clock text-cyan"></i> <span id="hudTimeWidget" class="hud-clock">00:00:00</span></div>
+      </div>
+
+      <div class="titlebar-controls">
+        <button class="control-btn min-btn" id="btnMinimize" title="Minimize"><i class="fa-solid fa-minus"></i></button>
+        <button class="control-btn max-btn" id="btnMaximize" title="Maximize"><i class="fa-regular fa-square"></i></button>
+        <button class="control-btn close-btn" id="btnClose" title="Minimize to Tray"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </header>
+
+    <!-- News Marquee Header Ticker -->
+    <div class="news-ticker-bar">
+      <span class="news-label"><i class="fa-solid fa-newspaper"></i> STARK TELEMETRY FEED</span>
+      <div class="news-marquee">
+        <span class="news-content" id="newsMarqueeText">
+          ⚡ STARK INDUSTRIES DATABANK: 100% Standalone Local LLM Engine Active (DeepSeek-R1 / Llama 3.2 Keyless) | 🌐 Global Quantum Computing milestone achieved | 🛰️ Arc Telemetry 100% stable | 🤖 J.A.R.V.I.S. Mark VII hands-free voice active...
+        </span>
+      </div>
+    </div>
+
+    <div class="hud-workspace">
+      <nav class="hud-sidebar">
+        <div class="stark-user-card">
+          <div class="arc-avatar">
+            <img src="assets/icon.png" alt="Stark User">
+            <div class="arc-ring-spin"></div>
+          </div>
+          <div class="stark-user-info">
+            <span class="stark-name">MR. SUMIT STARK</span>
+            <span class="stark-clearance">CLEARANCE: LEVEL 10</span>
+          </div>
+        </div>
+
+        <ul class="hud-nav-list">
+          <li class="hud-nav-item active" data-tab="jarvis-core">
+            <i class="fa-solid fa-brain"></i>
+            <span>J.A.R.V.I.S Core</span>
+          </li>
+          <li class="hud-nav-item" data-tab="holographic-browser">
+            <i class="fa-brands fa-google text-gold"></i>
+            <span>Google Search View</span>
+          </li>
+          <li class="hud-nav-item" data-tab="stark-studio">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Studio & Research</span>
+          </li>
+          <li class="hud-nav-item" data-tab="stark-protocols">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Protocols & Defense</span>
+          </li>
+          <li class="hud-nav-item" data-tab="quick-apps">
+            <i class="fa-solid fa-microchip"></i>
+            <span>Systems & Apps</span>
+          </li>
+          <li class="hud-nav-item" data-tab="code-sandbox">
+            <i class="fa-solid fa-code"></i>
+            <span>Code Sandbox</span>
+          </li>
+          <li class="hud-nav-item" data-tab="stark-tasks">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Stark Objectives</span>
+          </li>
+          <li class="hud-nav-item" data-tab="stark-vault">
+            <i class="fa-solid fa-database"></i>
+            <span>Data Vault</span>
+          </li>
+          <li class="hud-nav-item" data-tab="music-deck">
+            <i class="fa-solid fa-music text-gold"></i>
+            <span>Music & Ambient</span>
+          </li>
+          <li class="hud-nav-item" data-tab="phone-link">
+            <i class="fa-solid fa-mobile-screen-button text-gold"></i>
+            <span>Phone & Tablet Link</span>
+          </li>
+          <li class="hud-nav-item" data-tab="stark-config">
+            <i class="fa-solid fa-gear"></i>
+            <span>Configuration</span>
+          </li>
+        </ul>
+
+        <div class="hud-sidebar-footer">
+          <div class="sound-fx-bar">
+            <span>Audio Synth Cues</span>
+            <button class="sound-toggle-btn active" id="btnToggleSound" title="Toggle Sci-Fi Audio Effects">
+              <i class="fa-solid fa-volume-high"></i> ACTIVE
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <main class="hud-main-display">
+        <!-- 1. J.A.R.V.I.S. Core Interface (Main Screen) -->
+        <section class="hud-tab active" id="tab-jarvis-core">
+          <div class="holo-arc-header glass-hud-card">
+            <div class="arc-reactor-container" id="arcReactor">
+              <div class="arc-outer-ring"></div>
+              <div class="arc-inner-ring"></div>
+              <div class="arc-core-glow"></div>
+            </div>
+            <canvas id="hudAudioVisualizer" width="600" height="120"></canvas>
+
+            <div class="jarvis-status-box">
+              <div class="status-top-bar">
+                <span class="online-pulse" id="handsFreeListeningIndicator">🎤 "HEY JARVIS" HANDS-FREE LISTENING</span>
+                <span class="location-tag"><i class="fa-solid fa-location-dot"></i> STARK TOWER - INDIA</span>
+              </div>
+              <h1 id="jarvisGreetingTitle">At your service, Sir.</h1>
+              <p id="jarvisGreetingSub">Systems are fully operational. Say "Search [query] on Google" or type below.</p>
+              
+              <div class="protocol-chips">
+                <button class="proto-chip" onclick="openPhoneConnectModal()" style="border-color:#00ffaa; color:#00ffaa;"><i class="fa-solid fa-mobile-screen-button"></i> 📱 Connect Phone</button>
+                <button class="proto-chip" onclick="quickAsk('Search Quantum Computing on Google')"><i class="fa-brands fa-google text-gold"></i> Google Search View</button>
+                <button class="proto-chip" onclick="executeProtocol('diagnostics')"><i class="fa-solid fa-stethoscope"></i> Full Diagnostics</button>
+                <button class="proto-chip" onclick="executeProtocol('house-party')"><i class="fa-solid fa-bolt"></i> House Party Protocol</button>
+                <button class="proto-chip" onclick="executeProtocol('stealth')"><i class="fa-solid fa-eye-slash"></i> Stealth Protocol</button>
+                <button class="proto-chip" onclick="executeProtocol('ultron-defense')" style="border-color:#ff2a5f; color:#ff2a5f;"><i class="fa-solid fa-shield-cat"></i> Ultron Protocol</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Screen Desktop Apps Quick Dock Bar -->
+          <div class="glass-hud-card margin-top-md" style="padding:12px 16px;">
+            <div style="font-family:var(--font-title); font-size:12px; letter-spacing:1px; color:var(--text-secondary); margin-bottom:8px; display:flex; justify-content:space-between;">
+              <span><i class="fa-solid fa-grip"></i> QUICK DESKTOP APPS LAUNCH DOCK:</span>
+              <span id="hudActiveTimersWidget" style="color:#00ffaa; font-size:11px; font-weight:bold; font-family:'Orbitron',sans-serif;"><i class="fa-solid fa-stopwatch"></i> NO ACTIVE TIMERS</span>
+            </div>
+            <div class="desktop-apps-dock" id="quickLaunchDock">
+              <button class="app-btn chrome" onclick="launchApp('chrome')"><i class="fa-brands fa-chrome"></i> Chrome</button>
+              <button class="app-btn notepad" onclick="launchApp('notepad')"><i class="fa-solid fa-file-lines"></i> Notepad</button>
+              <button class="app-btn calc" onclick="launchApp('calc')"><i class="fa-solid fa-calculator"></i> Calculator</button>
+              <button class="app-btn explorer" onclick="launchApp('explorer')"><i class="fa-regular fa-folder-open"></i> File Explorer</button>
+              <button class="app-btn vscode" onclick="launchApp('code')"><i class="fa-solid fa-code"></i> VS Code</button>
+              <button class="app-btn spotify" onclick="launchApp('spotify')"><i class="fa-brands fa-spotify"></i> Spotify</button>
+              <button class="app-btn youtube" onclick="launchApp('youtube')"><i class="fa-brands fa-youtube"></i> YouTube</button>
+              <button class="app-btn cmd" onclick="launchApp('cmd')"><i class="fa-solid fa-terminal"></i> Command Prompt</button>
+            </div>
+          </div>
+
+          <!-- Encrypted Jarvis Telemetry Stream (Chat) -->
+          <div class="glass-hud-card margin-top-md" id="chatDropZone" style="flex:1; display:flex; flex-direction:column; overflow:hidden; position:relative;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(0,240,255,0.2); padding-bottom:8px; margin-bottom:12px;">
+              <span style="font-family:var(--font-title); font-size:12px; color:var(--cyan-bright);"><i class="fa-solid fa-terminal"></i> ENCRYPTED JARVIS TELEMETRY STREAM <span style="font-size:10px; color:rgba(255,255,255,0.4); margin-left:10px;"><i class="fa-solid fa-file-arrow-up"></i> (Drag & Drop PDF/Docs here)</span></span>
+              <button class="proto-chip" onclick="clearChatLog()" style="padding:4px 8px; font-size:10px; cursor:pointer;"><i class="fa-solid fa-broom"></i> Clear Stream</button>
+            </div>
+            
+            <div id="chatMessages" class="chat-messages-area" style="flex:1; overflow-y:auto; padding-right:10px;">
+              <div class="message system-msg">
+                <i class="fa-solid fa-shield-cat"></i> Telemetry buffer flushes completed. Awaiting orders, Sir.
+              </div>
+            </div>
+            
+            <div class="chat-input-area">
+              <button class="voice-btn" id="btnVoiceInput" title="Hold to Speak"><i class="fa-solid fa-microphone"></i></button>
+              <input type="text" id="userInput" class="text-input" placeholder="> Command J.A.R.V.I.S... (e.g. 'Search Iron Man suit')" autocomplete="off">
+              <button class="send-btn" id="btnSend" title="Execute Directive"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Live Holographic Google Search View Screen -->
+        <section class="hud-tab" id="tab-holographic-browser">
+          <div class="hud-section-header" style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h2><i class="fa-brands fa-google text-gold"></i> Stark Live Google Search Matrix</h2>
+              <p>Real-time Google search stream and web browser view (<span id="currentSearchQueryText">https://www.google.com</span>)</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="stark-btn" onclick="openExternalGoogleSearch()"><i class="fa-solid fa-arrow-up-right-from-square"></i> OPEN IN CHROME</button>
+            </div>
+          </div>
+
+          <!-- Search Address Bar -->
+          <div class="directive-input-bar margin-top-md glass-hud-card" style="padding:8px 14px;">
+            <i class="fa-brands fa-google text-cyan" style="align-self:center; font-size:16px;"></i>
+            <input type="text" id="browserSearchInput" placeholder="Enter query to search on Google..." style="border:none;">
+            <button class="stark-btn" onclick="triggerBrowserSearch()"><i class="fa-solid fa-magnifying-glass"></i> SEARCH</button>
+          </div>
+
+          <!-- Live Search Results Container Box -->
+          <div class="glass-hud-card margin-top-md" id="googleResultsCardBox" style="flex:1; display:flex; flex-direction:column; overflow-y:auto; padding:18px; min-height:480px; background:rgba(3,7,13,0.9); border:1px solid var(--stark-border);">
+            <div style="text-align:center; padding:40px; color:var(--text-secondary);">
+              <i class="fa-brands fa-google text-gold" style="font-size:48px; margin-bottom:14px; display:block;"></i>
+              <h3 style="color:var(--cyan-bright);">J.A.R.V.I.S. Google Search Matrix Ready</h3>
+              <p>Type your query above or say <strong>"Search [topic] on Google"</strong> to trigger live visual search.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Stark Creative & Research Studio Tab -->
+        <section class="hud-tab" id="tab-stark-studio">
+          <div class="hud-section-header">
+            <h2><i class="fa-solid fa-wand-magic-sparkles text-gold"></i> Stark Creative & Deep Research Studio</h2>
+            <p>Generate PowerPoints (PPTX), AI Art Images, Audio Speech Tracks, Video Outlines & Research Dossiers</p>
+          </div>
+
+          <div class="vault-hud-grid">
+            <div class="vault-nav glass-hud-card" style="width:320px; display:flex; flex-direction:column; gap:12px;">
+              <button class="stark-btn full-w" onclick="switchStudioMode('ppt')"><i class="fa-solid fa-file-powerpoint text-gold"></i> 📊 PowerPoint (PPTX)</button>
+              <button class="stark-btn full-w" onclick="switchStudioMode('image')"><i class="fa-solid fa-image text-cyan"></i> 🖼️ AI Image Generator</button>
+              <button class="stark-btn full-w" onclick="switchStudioMode('audio')"><i class="fa-solid fa-microphone-lines text-emerald"></i> 🎙️ Audio Speech Studio</button>
+              <button class="stark-btn full-w" onclick="switchStudioMode('video')"><i class="fa-solid fa-film text-purple"></i> 🎬 Video Storyboard Creator</button>
+              <button class="stark-btn full-w" onclick="switchStudioMode('research')"><i class="fa-solid fa-magnifying-glass-chart text-cyan"></i> 🔬 Deep Research Databank</button>
+            </div>
+
+            <div class="vault-content glass-hud-card" id="studioWorkspaceView" style="flex:1; padding:20px; display:flex; flex-direction:column; gap:16px;">
+              
+              <div id="studio-ppt-box" class="studio-subview">
+                <h3><i class="fa-solid fa-file-powerpoint text-gold"></i> Automatic PowerPoint Generator (.pptx)</h3>
+                <p style="color:var(--text-secondary); margin-bottom:12px;">Generate professional Stark-styled presentations directly into Microsoft PowerPoint.</p>
+                <div class="directive-input-bar margin-top-md">
+                  <input type="text" id="pptTopicInput" placeholder="Enter Presentation Topic (e.g., Artificial Intelligence, Cyber Security, Space Exploration)...">
+                  <button class="stark-btn" onclick="generatePPTXFromStudio()"><i class="fa-solid fa-bolt"></i> GENERATE PPT DECK</button>
+                </div>
+                <div id="pptStatusOutput" style="margin-top:14px; color:var(--cyan-bright); font-family:monospace;"></div>
+              </div>
+
+              <div id="studio-image-box" class="studio-subview" style="display:none;">
+                <h3><i class="fa-solid fa-image text-cyan"></i> Stark AI Image Generator</h3>
+                <p style="color:var(--text-secondary); margin-bottom:12px;">Synthesize 4K futuristic digital art illustrations.</p>
+                <div class="directive-input-bar margin-top-md">
+                  <input type="text" id="imagePromptInput" placeholder="Describe your image prompt (e.g., Cyberpunk Iron Man suit in neon cyberpunk city)...">
+                  <button class="stark-btn" onclick="generateAIImageFromStudio()"><i class="fa-solid fa-wand-magic-sparkles"></i> GENERATE IMAGE</button>
+                </div>
+                <div id="imageDisplayArea" style="margin-top:14px; text-align:center;"></div>
+              </div>
+
+              <div id="studio-audio-box" class="studio-subview" style="display:none;">
+                <h3><i class="fa-solid fa-microphone-lines text-emerald"></i> Audio Speech Synthesizer</h3>
+                <p style="color:var(--text-secondary); margin-bottom:12px;">Synthesize clear text into custom audio speech playback.</p>
+                <textarea id="audioTextInput" class="stark-note-body" placeholder="Enter script text to generate audio track..." style="height:120px;"></textarea>
+                <button class="stark-btn" onclick="generateAudioSpeechFromStudio()"><i class="fa-solid fa-volume-high"></i> SYNTHESIZE & PLAY AUDIO</button>
+              </div>
+
+              <div id="studio-video-box" class="studio-subview" style="display:none;">
+                <h3><i class="fa-solid fa-film text-purple"></i> Video Concept & Storyboard Creator</h3>
+                <p style="color:var(--text-secondary); margin-bottom:12px;">Generate cinematic scene breakdowns, video scripts, and visual keyframes.</p>
+                <div class="directive-input-bar margin-top-md">
+                  <input type="text" id="videoConceptInput" placeholder="Enter video topic or concept (e.g. Iron Man Mark VII flight test scene)...">
+                  <button class="stark-btn" onclick="generateVideoScriptFromStudio()"><i class="fa-solid fa-clapperboard"></i> BUILD STORYBOARD</button>
+                </div>
+                <div id="videoStoryboardOutput" style="margin-top:14px; background:rgba(3,7,13,0.8); padding:14px; border-radius:6px; font-family:var(--font-body); color:var(--text-primary); white-space:pre-wrap;"></div>
+              </div>
+
+              <div id="studio-research-box" class="studio-subview" style="display:none;">
+                <h3><i class="fa-solid fa-magnifying-glass-chart text-cyan"></i> Deep Research Databank Synthesis</h3>
+                <p style="color:var(--text-secondary); margin-bottom:12px;">Synthesize exhaustive executive research dossiers powered by Google Gemini AI.</p>
+                <div class="directive-input-bar margin-top-md">
+                  <input type="text" id="researchTopicInput" placeholder="Enter Research Subject (e.g. Quantum Computing breakthroughs, Fusion Energy scalability)...">
+                  <button class="stark-btn" onclick="generateDeepResearchFromStudio()"><i class="fa-solid fa-brain"></i> EXECUTE RESEARCH</button>
+                </div>
+                <div id="researchReportOutput" style="margin-top:14px; background:rgba(3,7,13,0.8); padding:14px; border-radius:6px; color:var(--text-primary); max-height:360px; overflow-y:auto;"></div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Protocols -->
+        <section class="hud-tab" id="tab-stark-protocols">
+          <div class="hud-section-header">
+            <h2><i class="fa-solid fa-shield-halved text-cyan"></i> Tactical Protocols & Cyber Defense Radar</h2>
+            <p>Deploy specialized operational presets and inspect authorized network device telemetry</p>
+          </div>
+
+          <div class="protocols-grid">
+            <div class="protocol-card glass-hud-card" onclick="executeProtocol('diagnostics')">
+              <div class="proto-icon-box cyan-glow"><i class="fa-solid fa-microchip"></i></div>
+              <div class="proto-details">
+                <h3>Full System Diagnostics</h3>
+                <p>Scans memory, network speed, active processors, and power output.</p>
+              </div>
+              <button class="execute-btn">EXECUTE</button>
+            </div>
+
+            <div class="protocol-card glass-hud-card" onclick="executeProtocol('house-party')">
+              <div class="proto-icon-box gold-glow"><i class="fa-solid fa-bolt"></i></div>
+              <div class="proto-details">
+                <h3>House Party Protocol</h3>
+                <p>Overclocks UI performance, activates all audio synths and neon glows.</p>
+              </div>
+              <button class="execute-btn">DEPLOY</button>
+            </div>
+
+            <div class="protocol-card glass-hud-card" onclick="executeProtocol('stealth')">
+              <div class="proto-icon-box dark-glow"><i class="fa-solid fa-eye-slash"></i></div>
+              <div class="proto-details">
+                <h3>Stealth Protocol</h3>
+                <p>Reduces display glare, mutes audio cues, and dims UI lighting for focus.</p>
+              </div>
+              <button class="execute-btn">ACTIVATE</button>
+            </div>
+
+            <div class="protocol-card glass-hud-card" onclick="executeProtocol('clean-slate')">
+              <div class="proto-icon-box red-glow"><i class="fa-solid fa-fire"></i></div>
+              <div class="proto-details">
+                <h3>Clean Slate Protocol</h3>
+                <p>Clears temporary logs, flushes memory buffers, and resets HUD state.</p>
+              </div>
+              <button class="execute-btn">PURGE</button>
+            </div>
+
+            <div class="protocol-card glass-hud-card" onclick="toggleSecurityGuardMode()" id="securityGuardProtocolCard" style="border-color:#ff2a5f;">
+              <div class="proto-icon-box red-glow"><i class="fa-solid fa-shield-cat text-pink"></i></div>
+              <div class="proto-details">
+                <h3 style="color:#ff2a5f;">🚨 Security Guard Mode (Imposter Siren)</h3>
+                <p id="securityGuardDescText">Monitors webcam for unauthorized intruders, sounds Iron Man alarm siren, snaps photo & locks PC!</p>
+              </div>
+              <button class="execute-btn" id="securityGuardToggleBtn" style="border-color:#ff2a5f; color:#ff2a5f;">ARM GUARD</button>
+            </div>
+
+            <div class="protocol-card glass-hud-card" onclick="toggleGlobalVoiceDictation()" style="border-color:#00ffaa;">
+              <div class="proto-icon-box green-glow"><i class="fa-solid fa-keyboard text-emerald"></i></div>
+              <div class="proto-details">
+                <h3 style="color:#00ffaa;">🎙️ Global Voice Dictation Auto-Typist</h3>
+                <p>Press <strong>Ctrl + Shift + J</strong> anywhere in Windows to speak out loud — JARVIS auto-types text into your active app!</p>
+              </div>
+              <button class="execute-btn" style="border-color:#00ffaa; color:#00ffaa;">TYPE NOW</button>
+            </div>
+
+            <div class="protocol-card glass-hud-card" onclick="triggerPhoneCall('You are JARVIS. Check in on Mr. Sumit and ask if he needs any assistance.')">
+              <div class="proto-icon-box gold-glow"><i class="fa-solid fa-phone-volume"></i></div>
+              <div class="proto-details">
+                <h3>Telephony Matrix: Call Me Now</h3>
+                <p>JARVIS will immediately dial your phone and initiate a voice conversation over the cellular network.</p>
+              </div>
+              <button class="execute-btn" style="border-color:#ffb700; color:#ffb700;">DIAL PHONE</button>
+            </div>
+          </div>
+
+          <div class="glass-hud-card margin-top-md" style="padding:18px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <h3><i class="fa-solid fa-network-wired text-emerald"></i> Local Network Device Radar</h3>
+              <button class="stark-btn" onclick="runNetworkScan()"><i class="fa-solid fa-radar"></i> SCAN LOCAL NETWORK</button>
+            </div>
+            <div id="networkDiagnosticsOutput" style="font-family:var(--font-body); font-size:13px; color:var(--text-secondary);">
+              Click "Scan Local Network" to detect authorized devices on your Wi-Fi databank.
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Systems & Apps -->
+        <section class="hud-tab" id="tab-quick-apps">
+          <div class="hud-section-header" style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div>
+              <h2><i class="fa-solid fa-desktop text-gold"></i> Installed Desktop Apps Launcher</h2>
+              <p>Real-time scanned programs & shortcuts on your computer (<span id="desktopAppCount">Scanning...</span>)</p>
+            </div>
+            <button class="stark-btn" onclick="refreshDesktopApps()"><i class="fa-solid fa-rotate"></i> RESCAN DESKTOP</button>
+          </div>
+
+          <div class="directive-input-bar margin-top-md glass-hud-card" style="padding:8px 14px;">
+            <i class="fa-solid fa-magnifying-glass text-cyan" style="align-self:center; font-size:16px;"></i>
+            <input type="text" id="appSearchInput" placeholder="Filter desktop applications (e.g. Chrome, Antigravity, Spotify, Command Prompt)..." style="border:none;">
+          </div>
+
+          <div class="apps-grid" id="allDesktopAppsGrid"></div>
+        </section>
+
+        <!-- 6. Code Sandbox -->
+        <section class="hud-tab" id="tab-code-sandbox">
+          <div class="hud-section-header">
+            <h2><i class="fa-solid fa-code text-cyan"></i> Stark Code Execution Sandbox</h2>
+            <p>Write and run instant JavaScript / Node logic directly inside J.A.R.V.I.S.</p>
+          </div>
+
+          <div class="vault-hud-grid">
+            <div class="vault-content glass-hud-card" style="flex:1;">
+              <span style="font-family:var(--font-sub); font-size:14px; color:var(--cyan-bright);"><i class="fa-solid fa-terminal"></i> Code Editor:</span>
+              <textarea id="sandboxCodeInput" class="stark-note-body" placeholder="console.log('J.A.R.V.I.S Sandbox Active!');&#10;const sum = 2 + 2;&#10;console.log('Result:', sum);" style="font-family:monospace; color:#00f0ff;"></textarea>
+              <button class="stark-btn" onclick="executeSandboxCode()"><i class="fa-solid fa-play"></i> RUN SCRIPT</button>
+            </div>
+
+            <div class="vault-content glass-hud-card" style="flex:1;">
+              <span style="font-family:var(--font-sub); font-size:14px; color:var(--gold-stark);"><i class="fa-solid fa-desktop"></i> Console Execution Output:</span>
+              <pre id="sandboxOutputConsole" style="flex:1; background:rgba(3,7,13,0.8); border:1px solid var(--stark-border); border-radius:4px; padding:12px; color:var(--text-primary); font-family:monospace; font-size:13px; overflow-y:auto; margin:0;">Console output will appear here...</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Tasks -->
+        <section class="hud-tab" id="tab-stark-tasks">
+          <div class="hud-section-header">
+            <h2><i class="fa-solid fa-crosshairs text-cyan"></i> Daily Directives & Targets</h2>
+            <p>Track critical directives assigned by Mr. Sumit</p>
+          </div>
+
+          <div class="directives-hud glass-hud-card">
+            <div class="directive-input-bar">
+              <input type="text" id="newTodoInput" placeholder="Enter new tactical objective...">
+              <button class="stark-btn" id="btnAddTodo"><i class="fa-solid fa-plus"></i> ADD DIRECTIVE</button>
+            </div>
+
+            <div class="directive-stats">
+              <div class="d-info">Target Completion: <strong id="taskProgressPercentage">0%</strong></div>
+              <div class="d-track"><div class="d-fill" id="taskProgressFill"></div></div>
+            </div>
+
+            <ul class="directive-list" id="todoList"></ul>
+          </div>
+        </section>
+
+        <!-- 8. Vault -->
+        <section class="hud-tab" id="tab-stark-vault">
+          <div class="hud-section-header">
+            <h2><i class="fa-solid fa-database text-gold"></i> Stark Encrypted Vault</h2>
+            <p>Notes, tactical memory buffers, and AI logs</p>
+          </div>
+
+          <div class="vault-hud-grid">
+            <div class="vault-nav glass-hud-card">
+              <button class="stark-btn full-w" onclick="createNote()"><i class="fa-solid fa-plus"></i> CREATE FILE</button>
+              <div class="vault-list" id="noteList"></div>
+            </div>
+
+            <div class="vault-content glass-hud-card">
+              <input type="text" id="noteTitle" class="stark-note-title" placeholder="File Identifier...">
+              <textarea id="noteBody" class="stark-note-body" placeholder="Enter secure log contents..."></textarea>
+              <div class="vault-actions">
+                <button class="stark-btn-danger" onclick="deleteCurrentNote()"><i class="fa-solid fa-trash"></i> PURGE NOTE</button>
+                <button class="stark-btn" onclick="saveCurrentNote()"><i class="fa-solid fa-floppy-disk"></i> COMMIT TO VAULT</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Stark Offline Music & Ambient Deck Tab -->
+        <section class="hud-tab" id="tab-music-deck">
+          <div class="hud-section-header">
+            <h2><i class="fa-solid fa-music text-gold"></i> Stark HUD Music & Ambient Deck (100% Offline)</h2>
+            <p>High-fidelity local ambient audio, synthesized soundscapes, and local MP3 player</p>
+          </div>
+
+          <div class="glass-hud-card margin-top-md" style="padding:24px; background:rgba(3,7,13,0.85); border:1px solid var(--stark-border);">
+            
+            <!-- Arc Equalizer Visualizer -->
+            <div style="display:flex; justify-content:center; align-items:flex-end; gap:6px; height:60px; margin-bottom:20px;" id="hudEqualizerBars">
+              <div class="eq-bar" style="width:6px; height:20px; background:#00f0ff; border-radius:3px;"></div>
+              <div class="eq-bar" style="width:6px; height:45px; background:#ffb700; border-radius:3px;"></div>
+              <div class="eq-bar" style="width:6px; height:30px; background:#00ffaa; border-radius:3px;"></div>
+              <div class="eq-bar" style="width:6px; height:55px; background:#00f0ff; border-radius:3px;"></div>
+              <div class="eq-bar" style="width:6px; height:25px; background:#ffb700; border-radius:3px;"></div>
+              <div class="eq-bar" style="width:6px; height:50px; background:#00ffaa; border-radius:3px;"></div>
+            </div>
+
+            <!-- Current Track Display -->
+            <div style="text-align:center; margin-bottom:20px;">
+              <h3 id="musicTrackTitle" style="color:#00f0ff; font-family:'Orbitron',sans-serif; font-size:18px; margin-bottom:6px;">🎵 IRON MAN ARC THEME</h3>
+              <p id="musicTrackSubtitle" style="color:rgba(255,255,255,0.6); font-size:12px; letter-spacing:1px;">STARK INDUSTRIES SYNTHESIZED CINEMATIC BRASS (100% OFFLINE)</p>
+            </div>
+
+            <!-- Playback Controls Bar -->
+            <div style="display:flex; justify-content:center; align-items:center; gap:20px; margin-bottom:20px;">
+              <button class="stark-btn" onclick="prevMusicTrack()" style="border-radius:50%; width:44px; height:44px; padding:0; display:flex; justify-content:center; align-items:center;"><i class="fa-solid fa-step-backward"></i></button>
+              <button class="stark-btn" id="musicPlayPauseBtn" onclick="toggleMusicPlayPause()" style="border-radius:50%; width:56px; height:56px; padding:0; display:flex; justify-content:center; align-items:center; border-color:#00ffaa; color:#00ffaa; font-size:20px;"><i class="fa-solid fa-play"></i></button>
+              <button class="stark-btn" onclick="nextMusicTrack()" style="border-radius:50%; width:44px; height:44px; padding:0; display:flex; justify-content:center; align-items:center;"><i class="fa-solid fa-step-forward"></i></button>
+            </div>
+
+            <!-- Volume Slider -->
+            <div style="display:flex; justify-content:center; align-items:center; gap:12px; max-width:320px; margin:0 auto 24px auto;">
+              <i class="fa-solid fa-volume-low text-cyan"></i>
+              <input type="range" id="musicVolumeSlider" min="0" max="100" value="80" oninput="setMusicVolume(this.value)" style="flex:1; accent-color:#00f0ff; cursor:pointer;">
+              <i class="fa-solid fa-volume-high text-cyan"></i>
+              <span id="musicVolVal" style="font-family:'Orbitron',sans-serif; font-size:11px; color:#00f0ff; width:35px;">80%</span>
+            </div>
+
+            <!-- Offline Preset Quick Launch Chips -->
+            <div style="text-align:center; border-top:1px solid rgba(0,240,255,0.15); padding-top:18px;">
+              <p style="font-size:11px; color:rgba(255,255,255,0.5); letter-spacing:1px; margin-bottom:12px; text-transform:uppercase;">⚡ STARK OFFLINE PRESET SOUNDSCAPES</p>
+              <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                <button class="proto-chip" onclick="playMusicPreset('ironman')"><i class="fa-solid fa-shield"></i> IRON MAN THEME</button>
+                <button class="proto-chip" onclick="playMusicPreset('lofi')"><i class="fa-solid fa-headphones"></i> LO-FI STUDY BEATS</button>
+                <button class="proto-chip" onclick="playMusicPreset('focus')"><i class="fa-solid fa-brain"></i> ALPHA FOCUS 432HZ</button>
+                <button class="proto-chip" onclick="playMusicPreset('starklab')"><i class="fa-solid fa-atom"></i> STARK LAB AMBIENCE</button>
+                <button class="proto-chip" onclick="scanLocalWindowsMusic()"><i class="fa-solid fa-folder-open text-gold"></i> SCAN WINDOWS MUSIC FOLDER</button>
+              </div>
+            </div>
+
+            <!-- Local Track List -->
+            <div id="localMusicListContainer" style="margin-top:20px; display:none; background:rgba(0,0,0,0.4); border:1px solid rgba(0,240,255,0.2); border-radius:6px; padding:12px; max-height:180px; overflow-y:auto;">
+              <h4 style="color:#00f0ff; font-size:11px; font-family:'Orbitron',sans-serif; margin-bottom:8px;"><i class="fa-solid fa-music"></i> LOCAL WINDOWS TRACKS DETECTED</h4>
+              <div id="localMusicItemsList" style="display:flex; flex-direction:column; gap:6px;"></div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 9. Stark Phone & Tablet Link Deck Tab -->
+        <section class="hud-tab" id="tab-phone-link">
+          <div class="hud-section-header" style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h2><i class="fa-solid fa-mobile-screen-button text-gold"></i> Stark Phone & Tablet Control Link</h2>
+              <p>Remote control your Android phone/tablet over USB or Wi-Fi (Photos, WhatsApp, Screen Mirroring)</p>
+            </div>
+            <button class="stark-btn" onclick="checkPhoneConnectionStatus()"><i class="fa-solid fa-rotate-right"></i> SCAN CONNECTED PHONES</button>
+          </div>
+
+          <!-- Connection Telemetry Status Banner -->
+          <div class="glass-hud-card margin-top-md" style="padding:16px 20px; display:flex; justify-content:space-between; align-items:center; background:rgba(3,7,13,0.85); border:1px solid var(--stark-border);">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <i class="fa-solid fa-mobile-screen text-cyan" style="font-size:28px;"></i>
+              <div>
+                <h3 id="phoneDeviceNameTag" style="color:#00f0ff; font-family:'Orbitron',sans-serif; font-size:14px;">AWAITING PHONE CONNECTION...</h3>
+                <p id="phoneDeviceSubTag" style="color:rgba(255,255,255,0.6); font-size:11px;">Connect phone via USB Cable (with USB Debugging ON) OR Wireless Wi-Fi ADB.</p>
+              </div>
+            </div>
+            <span id="phoneConnectionBadge" class="proto-chip" style="border-color:#ffb700; color:#ffb700;">🟡 STANDBY</span>
+          </div>
+
+          <!-- Wireless Wi-Fi Pairing Panel -->
+          <div class="glass-hud-card margin-top-md" style="padding:16px; background:rgba(3,7,13,0.7); border:1px solid rgba(0,240,255,0.2);">
+            <h4 style="color:#ffb700; font-family:'Orbitron',sans-serif; font-size:12px; margin-bottom:8px;"><i class="fa-solid fa-wifi"></i> WIRELESS WI-FI ADB PAIRING</h4>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <input type="text" id="phoneWifiIpInput" class="text-input" placeholder="Enter Phone IP Address (e.g. 192.168.1.5)" style="flex:1;">
+              <button class="stark-btn" onclick="connectPhoneWifi()"><i class="fa-solid fa-link"></i> CONNECT WI-FI</button>
+            </div>
+          </div>
+
+          <!-- Phone Remote Commands Grid -->
+          <div class="vault-hud-grid margin-top-md">
+            
+            <div class="vault-card glass-hud-card" onclick="triggerPhoneAction('open-app', 'photos')" style="cursor:pointer;">
+              <i class="fa-solid fa-images text-gold" style="font-size:32px; margin-bottom:10px;"></i>
+              <h3 style="color:#00f0ff;">🖼️ OPEN PHOTOS / GALLERY</h3>
+              <p>Launches Photos app on your connected phone screen instantly.</p>
+              <button class="stark-btn margin-top-md" style="width:100%;"><i class="fa-solid fa-arrow-up-right-from-square"></i> OPEN PHOTOS</button>
+            </div>
+
+            <div class="vault-card glass-hud-card" onclick="triggerPhoneAction('open-app', 'whatsapp')" style="cursor:pointer;">
+              <i class="fa-brands fa-whatsapp text-gold" style="font-size:32px; margin-bottom:10px;"></i>
+              <h3 style="color:#00ffaa;">💬 OPEN WHATSAPP</h3>
+              <p>Opens WhatsApp messaging app directly on your phone.</p>
+              <button class="stark-btn margin-top-md" style="width:100%; border-color:#00ffaa; color:#00ffaa;"><i class="fa-solid fa-comments"></i> OPEN WHATSAPP</button>
+            </div>
+
+            <div class="vault-card glass-hud-card" onclick="triggerPhoneAction('open-app', 'youtube')" style="cursor:pointer;">
+              <i class="fa-brands fa-youtube text-gold" style="font-size:32px; margin-bottom:10px;"></i>
+              <h3 style="color:#ff2a5f;">🎥 OPEN YOUTUBE</h3>
+              <p>Launches YouTube video app on phone screen.</p>
+              <button class="stark-btn margin-top-md" style="width:100%; border-color:#ff2a5f; color:#ff2a5f;"><i class="fa-solid fa-play"></i> OPEN YOUTUBE</button>
+            </div>
+
+            <div class="vault-card glass-hud-card" onclick="triggerPhoneAction('open-app', 'camera')" style="cursor:pointer;">
+              <i class="fa-solid fa-camera text-cyan" style="font-size:32px; margin-bottom:10px;"></i>
+              <h3 style="color:#00f0ff;">📷 OPEN CAMERA</h3>
+              <p>Activates phone camera shutter view.</p>
+              <button class="stark-btn margin-top-md" style="width:100%;"><i class="fa-solid fa-camera"></i> OPEN CAMERA</button>
+            </div>
+
+            <div class="vault-card glass-hud-card" onclick="triggerPhoneAction('unlock')" style="cursor:pointer;">
+              <i class="fa-solid fa-lock-open text-gold" style="font-size:32px; margin-bottom:10px;"></i>
+              <h3 style="color:#ffb700;">🔓 UNLOCK PHONE SCREEN</h3>
+              <p>Sends power key event and unlocks phone display.</p>
+              <button class="stark-btn margin-top-md" style="width:100%; border-color:#ffb700; color:#ffb700;"><i class="fa-solid fa-key"></i> UNLOCK PHONE</button>
+            </div>
+
+            <div class="vault-card glass-hud-card" onclick="triggerPhoneAction('capture-screen')" style="cursor:pointer;">
+              <i class="fa-solid fa-desktop text-cyan" style="font-size:32px; margin-bottom:10px;"></i>
+              <h3 style="color:#00f0ff;">📱 MIRROR PHONE DISPLAY</h3>
+              <p>Captures live snapshot of phone screen directly inside JARVIS HUD.</p>
+              <button class="stark-btn margin-top-md" style="width:100%;"><i class="fa-solid fa-eye"></i> SNAPSHOT PHONE SCREEN</button>
+            </div>
+
+          </div>
+
+          <!-- Live Captured Phone Screen Display Box -->
+          <div id="phoneMirrorDisplayCard" class="glass-hud-card margin-top-md" style="display:none; padding:20px; text-align:center; background:rgba(3,7,13,0.9); border:1px solid #00f0ff;">
+            <h4 style="color:#00f0ff; font-family:'Orbitron',sans-serif; margin-bottom:12px;"><i class="fa-solid fa-mobile-screen"></i> LIVE PHONE SCREEN DISPLAY</h4>
+            <img id="phoneScreenCaptureImg" src="" style="max-height:420px; border-radius:12px; border:2px solid #00f0ff; box-shadow:0 0 25px rgba(0,240,255,0.4);">
+          </div>
+
+        </section>
+
+        <!-- 10. Configuration -->
+        <section class="hud-tab" id="tab-stark-config">
+          <div class="hud-section-header">
+            <h2><i class="fa-solid fa-gear text-cyan"></i> Suit HUD Themes & Configuration</h2>
+            <p>Configure suit visual palettes, voice settings, and Gemini API keys</p>
+          </div>
+
+          <div class="config-grid">
+            <div class="config-card glass-hud-card">
+              <div class="config-info">
+                <h3><i class="fa-solid fa-palette text-gold"></i> Holographic Suit Color Themes</h3>
+                <p>Select visual lighting presets for J.A.R.V.I.S Console HUD.</p>
+              </div>
+              <div class="config-body margin-top-md" style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="proto-chip" onclick="setSuitTheme('default')" style="border-color:#00f0ff; color:#00f0ff;"><i class="fa-solid fa-shield"></i> Mark VII (Cyan & Gold)</button>
+                <button class="proto-chip" onclick="setSuitTheme('hulkbuster')" style="border-color:#ff2a5f; color:#ff2a5f;"><i class="fa-solid fa-robot"></i> Hulkbuster (Crimson Red)</button>
+                <button class="proto-chip" onclick="setSuitTheme('nanotech')" style="border-color:#00ffaa; color:#00ffaa;"><i class="fa-solid fa-atom"></i> Nanotech (Emerald Green)</button>
+                <button class="proto-chip" onclick="setSuitTheme('stealth')" style="border-color:#7090b0; color:#7090b0;"><i class="fa-solid fa-user-ninja"></i> Stealth (Carbon Shadow)</button>
+              </div>
+            </div>
+
+            <div class="config-card glass-hud-card">
+              <div class="config-row">
+                <div class="config-info">
+                  <h3>Windows Boot Auto-Pop Up</h3>
+                  <p>Initializes J.A.R.V.I.S HUD automatically whenever your computer powers on.</p>
+                </div>
+                <label class="hud-toggle">
+                  <input type="checkbox" id="toggleStartupCheck" checked>
+                  <span class="hud-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="config-card glass-hud-card">
+              <div class="config-row">
+                <div class="config-info">
+                  <h3>J.A.R.V.I.S. Audio Output</h3>
+                  <p>Spoken responses using synthetic voice audio.</p>
+                </div>
+                <label class="hud-toggle">
+                  <input type="checkbox" id="toggleVoiceResponse" checked>
+                  <span class="hud-slider"></span>
+                </label>
+              </div>
+              <div class="config-body margin-top-md">
+                <label>Voice Selector:</label>
+                <select id="voiceSelect" class="stark-select"></select>
+              </div>
+            </div>
+
+            <div class="config-card glass-hud-card">
+              <div class="config-info">
+                <h3><i class="fa-solid fa-microchip text-emerald"></i> Local AI Engine (100% Keyless & Offline)</h3>
+                <p>JARVIS is running entirely on local laptop hardware via Ollama. Zero API keys required.</p>
+              </div>
+              <div class="config-body margin-top-md" style="display:flex; flex-direction:column; gap:10px;">
+                <div style="background:rgba(0,255,170,0.05); border:1px solid rgba(0,255,170,0.2); padding:12px; border-radius:6px; color:#00ffaa; font-family:'Orbitron',sans-serif; font-size:12px;">
+                  <i class="fa-solid fa-circle-check"></i> ACTIVE ENGINE: Ultra-Lightweight Local LLM (qwen2.5:0.5b - 397MB)
+                </div>
+                <p style="font-size:12px; color:rgba(255,255,255,0.6);">Running 100% locally on your CPU. Uses only 397 MB RAM with zero heating or lag.</p>
+              </div>
+            </div>
+
+
+            <div class="config-card glass-hud-card">
+              <div class="config-info">
+                <h3><i class="fa-solid fa-phone text-emerald"></i> Telephony Engine (Bland AI)</h3>
+                <p>Allow JARVIS to call your real phone. Get an API key from <a href="https://app.bland.ai/" target="_blank" style="color:var(--cyan-bright);">Bland AI</a>.</p>
+              </div>
+              <div class="config-body margin-top-md" style="display:flex; flex-direction:column; gap:10px;">
+                <div>
+                  <label>YOUR PHONE NUMBER (e.g. +1234567890):</label>
+                  <input type="text" id="phoneInput" class="directive-input-bar" style="width:100%; padding:10px; background:rgba(3,7,13,0.8); border:1px solid var(--stark-border); color:white; border-radius:4px;" placeholder="+1234567890">
+                </div>
+                <div>
+                  <label>BLAND_API_KEY:</label>
+                  <input type="password" id="blandKeyInput" class="directive-input-bar" style="width:100%; padding:10px; background:rgba(3,7,13,0.8); border:1px solid var(--stark-border); color:white; border-radius:4px;" placeholder="sk-...">
+                </div>
+                <button class="stark-btn" onclick="saveTelephonySettings()" style="align-self:flex-start; margin-top:6px;">
+                  <i class="fa-solid fa-shield"></i> SAVE TELEPHONY SECRETS
+                </button>
+              </div>
+            </div>
+
+            <div class="config-card glass-hud-card">
+              <div class="config-row">
+                <div class="config-info">
+                  <h3><i class="fa-solid fa-clock text-gold"></i> Automated Telephony Schedule</h3>
+                  <p>JARVIS will automatically dial your phone every day at the time specified below.</p>
+                </div>
+                <label class="hud-toggle">
+                  <input type="checkbox" id="toggleScheduledCall">
+                  <span class="hud-slider"></span>
+                </label>
+              </div>
+              <div class="config-body margin-top-md" style="display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <label>TARGET TIME (HH:MM):</label>
+                  <input type="time" id="scheduledTimeInput" style="padding:8px; background:rgba(3,7,13,0.8); border:1px solid var(--stark-border); color:white; border-radius:4px;">
+                </div>
+                <div>
+                  <label>VOICE PROMPT FOR JARVIS:</label>
+                  <input type="text" id="scheduledPromptInput" class="directive-input-bar" style="width:100%; padding:10px; background:rgba(3,7,13,0.8); border:1px solid var(--stark-border); color:white; border-radius:4px;" placeholder="You are JARVIS. Give me my daily briefing.">
+                </div>
+                <button class="stark-btn" onclick="saveScheduledCallSettings()" style="align-self:flex-start; margin-top:6px;">
+                  <i class="fa-solid fa-floppy-disk"></i> UPDATE SCHEDULE
+                </button>
+              </div>
+            </div>
+            <!-- Face Memory & Relationship Manager Card -->
+            <div class="config-card glass-hud-card" id="faceMemoryManagerCard">
+              <div class="config-info">
+                <h3><i class="fa-solid fa-user-gear text-cyan"></i> AI Facial Radar & Multi-Person Family/Friend Memory</h3>
+                <p>JARVIS continuously monitors your webcam radar, recognizes you (Mr. Sumit), and learns new faces of family & friends with personalized greetings.</p>
+              </div>
+              <div class="config-body margin-top-md" style="display:flex; flex-direction:column; gap:12px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                  <button class="stark-btn" onclick="openRegisterFaceModal()" style="border-color:#00ffaa; color:#00ffaa;">
+                    <i class="fa-solid fa-user-plus"></i> LEARN PERSON ON CAMERA NOW
+                  </button>
+                  <button class="proto-chip" onclick="loadRegisteredFacesUI()" style="cursor:pointer;">
+                    <i class="fa-solid fa-arrows-rotate"></i> Refresh Face Database
+                  </button>
+                </div>
+
+                <div id="registeredFacesGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:12px; margin-top:10px;">
+                  <!-- Dynamic Face Cards render here -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- Hidden Background Webcam Feed for AI Radar -->
+    <video id="bgWebcamVideo" autoplay muted playsinline style="display:none;"></video>
+
+    <!-- Modal: Learn Person on Camera -->
+    <div id="modalRegisterNewFace" class="glass-hud-card" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:100000; width:90%; max-width:440px; padding:24px; border:1px solid var(--cyan-bright); box-shadow:0 0 40px rgba(0,240,255,0.4); backdrop-filter:blur(24px); border-radius:12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--stark-border); padding-bottom:10px; margin-bottom:16px;">
+        <h3 style="font-family:var(--font-title); font-size:14px; color:var(--cyan-bright); margin:0;"><i class="fa-solid fa-user-plus text-emerald"></i> LEARN NEW PERSON FACE</h3>
+        <button class="proto-chip" onclick="closeRegisterFaceModal()" style="padding:4px 8px; cursor:pointer;">✕ CLOSE</button>
+      </div>
+
+      <div style="text-align:center; margin-bottom:14px;">
+        <div style="position:relative; width:160px; height:160px; margin:0 auto; border-radius:50%; overflow:hidden; border:2px solid var(--cyan-bright); box-shadow:0 0 16px var(--cyan-glow);">
+          <canvas id="registerFaceCanvas" width="160" height="160" style="width:100%; height:100%; object-fit:cover;"></canvas>
+        </div>
+        <div style="font-size:11px; color:var(--text-secondary); margin-top:8px;">Capture clear face snapshot from webcam</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div>
+          <label style="font-size:11px; color:var(--cyan-bright); font-weight:bold;">PERSON'S NAME:</label>
+          <input type="text" id="newFaceNameInput" style="width:100%; padding:10px; background:rgba(3,7,13,0.85); border:1px solid var(--stark-border); color:white; border-radius:4px; font-family:inherit; margin-top:4px;" placeholder="e.g. Priya / Rahul / Mom">
+        </div>
+        <div>
+          <label style="font-size:11px; color:var(--gold-stark); font-weight:bold;">RELATIONSHIP TO MR. SUMIT:</label>
+          <select id="newFaceRelationSelect" style="width:100%; padding:10px; background:rgba(3,7,13,0.85); border:1px solid var(--stark-border); color:white; border-radius:4px; font-family:inherit; margin-top:4px;">
+            <option value="Creator & Boss">Creator & Master (Sumit)</option>
+            <option value="Sister">Sister</option>
+            <option value="Brother">Brother</option>
+            <option value="Mom">Mom / Mother</option>
+            <option value="Dad">Dad / Father</option>
+            <option value="Friend">Friend</option>
+            <option value="Colleague">Colleague / Guest</option>
+            <option value="Family Member">Family Member</option>
+          </select>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:12px;">
+          <button class="stark-btn" onclick="captureSnapshotForNewFace()" style="flex:1;"><i class="fa-solid fa-camera"></i> CAPTURE FACE</button>
+          <button class="stark-btn" onclick="saveNewFaceProfile()" style="flex:1; border-color:#00ffaa; color:#00ffaa;"><i class="fa-solid fa-floppy-disk"></i> SAVE TO MEMORY</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JARVIS Custom Toast Notification System -->
+    <div id="jarvisNotificationContainer"></div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "nova-personal-ai",
+  "version": "1.0.0",
+  "description": "Personal AI Desktop Assistant with Windows Auto-Start Pop Up",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "setup-startup": "node setup-startup.js enable",
+    "remove-startup": "node setup-startup.js disable"
+  },
+  "keywords": [
+    "personal-ai",
+    "desktop-assistant",
+    "electron",
+    "windows-startup"
+  ],
+  "author": "Sumit",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.3.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "nodemailer": "^9.0.3",
+    "playwright": "^1.62.1",
+    "pptxgenjs": "^4.0.1",
+    "systeminformation": "^5.33.1"
+  }
+}
