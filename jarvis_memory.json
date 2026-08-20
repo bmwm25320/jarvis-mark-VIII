@@ -1,0 +1,506 @@
+{
+  "history": [
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"JARVIS - Personal AI Console\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-14T08:14:51.662Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Thank you, Mr. Sumit! It's great to be working with you.\"",
+      "timestamp": "2026-08-14T08:14:51.662Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"Climate Action Presentation | Julius AI - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-14T08:15:26.100Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's a pleasure to see you again in the climate action presentation!\"",
+      "timestamp": "2026-08-14T08:15:26.100Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"google ppt maker - Google Search - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-14T08:15:58.181Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it seems the Google Search has taken over your current window!\"",
+      "timestamp": "2026-08-14T08:15:58.181Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"process\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-14T08:16:31.967Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's a pleasure to be your personal AI assistant now!\"",
+      "timestamp": "2026-08-14T08:16:31.967Z"
+    },
+    {
+      "sender": "user",
+      "text": "start the process",
+      "timestamp": "2026-08-14T08:16:37.081Z"
+    },
+    {
+      "sender": "ai",
+      "text": "Alright, I'll start the process for you. Please provide me with the details and instructions you'd",
+      "timestamp": "2026-08-14T08:16:37.081Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"VIII A .pptx - Google Slides - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-14T08:17:04.318Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's great to see you back in the office! How are things",
+      "timestamp": "2026-08-14T08:17:04.318Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"google ppt maker - Google Search - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-14T08:17:33.266Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's been a while since we last spoke. How are things at",
+      "timestamp": "2026-08-14T08:17:33.266Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"app.napkin.ai/__/auth/handler?apiKey=AIzaSyByZOB4tJvZSwCKVh0_XBTAVDbetpI4q8Y&appName=%5BDEFAULT%5D&authType=signInViaRedirect&redirectUrl=https%3A%2F%2Fapp.napkin.ai%2Fsignin%3Flogin_processing%3Dtrue&v=12.2.0&providerId=google.com&scopes=profile%2Cemail%2Copenid - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-14T08:18:10.686Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Hey, Google! Thanks for the switch! 🚀\"",
+      "timestamp": "2026-08-14T08:18:10.686Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"Your battery is running low.\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-14T08:18:40.792Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it seems your laptop's battery is running low. Let me check the",
+      "timestamp": "2026-08-14T08:18:40.792Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"Desktop Jarvis Assistant ...\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-15T06:54:28.496Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's great to see you back in the office!\"",
+      "timestamp": "2026-08-15T06:54:28.498Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"gemini api key - Google Search - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-15T06:55:08.254Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's refreshing to switch back to Google Search for API keys!\"",
+      "timestamp": "2026-08-15T06:55:08.254Z"
+    },
+    {
+      "sender": "user",
+      "text": "Image 1 is the registered reference photo of system owner Mr. Sumit. Image 2 is a live webcam frame. Are both images showing the exact same person? Respond with strictly \"AUTHORIZED\" or \"DENIED\".",
+      "timestamp": "2026-08-15T06:55:55.925Z"
+    },
+    {
+      "sender": "ai",
+      "text": "AUTHORIZED",
+      "timestamp": "2026-08-15T06:55:55.925Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"Snipping Tool Overlay\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-15T06:56:26.448Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's been a while since we last spoke! How are things at",
+      "timestamp": "2026-08-15T06:56:26.448Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"VIII A .pptx - Google Drive - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T03:33:46.101Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's refreshing to have the Google Drive at your disposal!\"",
+      "timestamp": "2026-08-20T03:33:46.103Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"JARVIS - Stark Mobile OS\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T03:35:31.140Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's great to see you switching windows to Stark Mobile OS!\"",
+      "timestamp": "2026-08-20T03:35:31.140Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"VIII A .pptx - Google Drive - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T03:36:10.154Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's been a while since we last chatted! How are things",
+      "timestamp": "2026-08-20T03:36:10.154Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"Ollama\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T03:42:04.490Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Ollama's running smoothly, thanks for the update!\"",
+      "timestamp": "2026-08-20T03:42:04.491Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"New Tab - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:30:21.883Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's refreshing to have Google Chrome open in your new tab!\"",
+      "timestamp": "2026-08-20T04:30:21.891Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"JARVIS - Stark Mobile OS\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:33:36.048Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's great to see you switching windows to Stark Mobile OS.\"",
+      "timestamp": "2026-08-20T04:33:36.049Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"Inbox (604) - bmwm25320@gmail.com - Gmail - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:35:22.252Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's great to have you back in the game!\"",
+      "timestamp": "2026-08-20T04:35:22.252Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"TLSH_R&D Script_Cl-VIII-A_2026-27 (1) New.docx - Google Drive - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:35:48.814Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's refreshing to have the latest version of TLSH_R&D Script",
+      "timestamp": "2026-08-20T04:35:48.814Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"VIII A .pptx - Google Drive - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:35:57.041Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's a pleasure to assist with your work.\"",
+      "timestamp": "2026-08-20T04:35:57.041Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"Search\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:36:37.154Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's a pleasure to assist with your tasks now.\"",
+      "timestamp": "2026-08-20T04:36:37.154Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"New Tab - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:37:09.136Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Thank you for switching to Google Chrome, Mr. Sumit! It's a pleasure to assist",
+      "timestamp": "2026-08-20T04:37:09.136Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"youtube.com/shorts/8zcT1PPZztg - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:37:47.163Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's a pleasure to have you back with us!\"",
+      "timestamp": "2026-08-20T04:37:47.163Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"VIII A .pptx - Google Drive - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:38:23.989Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's been a while since we last met. How are things at",
+      "timestamp": "2026-08-20T04:38:23.989Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"Quick settings\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:39:00.350Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Quick settings? I'm glad you're using my AI assistant!\"",
+      "timestamp": "2026-08-20T04:39:00.350Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"VIII A .pptx - Google Drive - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:40:46.841Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's been a while since we last met. How are you today",
+      "timestamp": "2026-08-20T04:40:46.841Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"VIII A .pptx - Google Drive - Google Chrome\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:42:31.674Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's been a while since we last spoke. How are things at",
+      "timestamp": "2026-08-20T04:42:31.674Z"
+    },
+    {
+      "sender": "user",
+      "text": "You are J.A.R.V.I.S., the personal AI assistant created by your boss Mr. Sumit. Mr. Sumit just switched windows to: \"JARVIS - Stark Mobile OS\".\nGive ONE very short sentence (under 12 words) directly addressing Mr. Sumit about what he is doing.\nExample: \"Greetings, Mr. Sumit! I see you switched to Chrome.\"\nNo markdown. No asterisks. No bullet points. Plain natural speech only. Be witty and polite.",
+      "timestamp": "2026-08-20T04:43:11.625Z"
+    },
+    {
+      "sender": "ai",
+      "text": "\"Mr. Sumit, it's great to see you back in the Stark Mobile OS world!\"",
+      "timestamp": "2026-08-20T04:43:11.625Z"
+    }
+  ],
+  "activities": [
+    {
+      "timestamp": "2026-08-20T04:43:11.684Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:42:31.725Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:40:46.904Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:39:00.389Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:38:24.034Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:37:47.212Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:37:09.177Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:36:37.204Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:35:57.081Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:35:48.847Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:35:22.349Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:33:36.098Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T04:30:21.935Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T03:42:05.107Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T03:36:10.236Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T03:35:31.248Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-20T03:33:46.161Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-15T06:56:26.481Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-15T06:55:55.974Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-15T06:55:08.295Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-15T06:54:28.567Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:18:40.835Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:18:10.723Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:17:33.294Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:17:04.353Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:16:37.116Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:16:32.023Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:15:58.382Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:15:26.150Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:14:51.737Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:11:38.243Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:10:33.797Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:10:01.800Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:09:09.868Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:08:21.804Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:06:50.631Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:06:18.705Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:05:35.600Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:05:03.620Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:04:23.139Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:03:49.860Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:03:19.102Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:01:59.075Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:01:26.317Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T08:00:52.490Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T07:57:58.264Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T07:57:24.522Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T07:57:04.333Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T07:56:27.787Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    },
+    {
+      "timestamp": "2026-08-14T07:55:54.044Z",
+      "action": "AI Query answered via Local LLM (qwen2.5:0.5b)"
+    }
+  ]
+}
